@@ -62,3 +62,19 @@ button:hover {
 .play-again:hover {
     background-color: #2980b9;
 }
+
+.result {
+    margin-bottom: 20px;
+}
+
+.result .question {
+    font-weight: bold;
+}
+
+.result .answer {
+    color: #e74c3c;
+}
+
+.result .correct-answer {
+    color: #27ae60;
+}
