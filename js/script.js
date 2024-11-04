@@ -1,12 +1,25 @@
+import { fetchQuestions } from '../data/questions.js';
+
 let currentRound = 0;
 let score = 0;
+let questions = [];
+
+async function initializeQuiz() {
+    questions = await fetchQuestions();
+    displayQuestion();
+}
 
 function displayQuestion() {
     if (currentRound >= 10) {
+        const percentage = (score / 10) * 100;
         document.querySelector('.container').innerHTML = `
-            <h1>Quiz Complete!</h1>
-            <p>Final Score: ${score}/10</p>
-            <button onclick="location.reload()">Play Again</button>
+            <div class="game-over">
+                <h1>🎮 Game Over! 🎮</h1>
+                <div class="score">
+                    Your final score: ${score}/10 (${percentage}%)
+                </div>
+                <button class="play-again" onclick="location.reload()">Play Again</button>
+            </div>
         `;
         return;
     }
@@ -36,5 +49,5 @@ function checkAnswer(selectedAnswer) {
     displayQuestion();
 }
 
-// Initialize quiz when page loads
-document.addEventListener('DOMContentLoaded', displayQuestion);
+// Start quiz when page loads
+document.addEventListener('DOMContentLoaded', initializeQuiz);

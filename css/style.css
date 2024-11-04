@@ -36,3 +36,29 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.game-over {
+    text-align: center;
+    padding: 20px;
+}
+
+.game-over h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.game-over .score {
+    font-size: 24px;
+    color: #27ae60;
+    margin-bottom: 20px;
+}
+
+.play-again {
+    background-color: #3498db;
+    padding: 12px 24px;
+    font-size: 18px;
+}
+
+.play-again:hover {
+    background-color: #2980b9;
+}
