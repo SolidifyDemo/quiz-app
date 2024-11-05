@@ -1,5 +1,3 @@
-import he from 'he';
-
 // questions.js
 async function fetchQuestions() {
     try {
@@ -10,13 +8,13 @@ async function fetchQuestions() {
             // Combine correct and incorrect answers and shuffle them
             const answers = [...q.incorrect_answers, q.correct_answer]
                 .sort(() => Math.random() - 0.5)
-                .map(answer => he.decode(answer));
+                .map(answer => decodeHtml(answer));
             
             return {
-                question: he.decode(q.question),
+                question: decodeHtml(q.question),
                 answers: answers,
                 // Find index of correct answer in shuffled array
-                correct: answers.indexOf(he.decode(q.correct_answer))
+                correct: answers.indexOf(decodeHtml(q.correct_answer))
             };
         });
     } catch (error) {
@@ -35,6 +33,13 @@ async function fetchQuestions() {
             }
         ];
     }
+}
+
+// Function to decode HTML entities
+function decodeHtml(html) {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
 }
 
 // Export for use in script.js
