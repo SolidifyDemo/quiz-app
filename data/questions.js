@@ -1,3 +1,5 @@
+import he from 'he';
+
 // questions.js
 async function fetchQuestions() {
     try {
@@ -7,13 +9,14 @@ async function fetchQuestions() {
         return data.results.map(q => {
             // Combine correct and incorrect answers and shuffle them
             const answers = [...q.incorrect_answers, q.correct_answer]
-                .sort(() => Math.random() - 0.5);
+                .sort(() => Math.random() - 0.5)
+                .map(answer => he.decode(answer));
             
             return {
-                question: q.question,
+                question: he.decode(q.question),
                 answers: answers,
                 // Find index of correct answer in shuffled array
-                correct: answers.indexOf(q.correct_answer)
+                correct: answers.indexOf(he.decode(q.correct_answer))
             };
         });
     } catch (error) {
